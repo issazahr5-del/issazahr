@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>🎄 Merry Christmas 🎄</title>
+    <title>Merry Christmas</title>
     <style>
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-family: 'Comic Sans MS', cursive;
             text-align: center;
             margin: 0;
             padding: 0;
@@ -13,67 +13,27 @@
             background: linear-gradient(to bottom, #87ceeb, #fff);
             overflow: hidden;
         }
-        h1 {
-            margin-top: 30px;
-            color: #d32f2f;
-            font-size: 48px;
-            text-shadow: 2px 2px #fff;
+        #message {
+            font-size: 40px;
+            color: green;
+            font-weight: bold;
+            margin-top: 20px;
         }
         a {
-            display: inline-block;
-            margin-top: 50px;
-            padding: 15px 30px;
-            background-color: #ff4500;
+            background: #ff4444;
+            padding: 12px 25px;
             color: white;
             text-decoration: none;
             border-radius: 10px;
-            font-size: 20px;
-            transition: 0.3s;
         }
-        a:hover {
-            background-color: #ff6347;
-        }
-        #message {
-            margin-top: 40px;
-            font-size: 36px;
-            color: green;
-            font-weight: bold;
-        }
-
-        /* شجرة عيد الميلاد */
         .tree {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
             width: 0;
             height: 0;
             border-left: 60px solid transparent;
             border-right: 60px solid transparent;
             border-bottom: 100px solid green;
+            margin: 100px auto 0;
         }
-        .tree:after {
-            content: "";
-            position: absolute;
-            top: -60px;
-            left: -60px;
-            width: 0;
-            height: 0;
-            border-left: 60px solid transparent;
-            border-right: 60px solid transparent;
-            border-bottom: 100px solid green;
-        }
-
-        /* كرات زينة */
-        .ball {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            animation: drop 5s infinite;
-        }
-
-        /* الثلج */
         .snow {
             position: absolute;
             top: -10px;
@@ -81,12 +41,7 @@
             height: 10px;
             background: white;
             border-radius: 50%;
-            opacity: 0.8;
             animation: fall linear infinite;
-        }
-        @keyframes drop {
-            0% {top: -20px;}
-            100% {top: 100vh;}
         }
         @keyframes fall {
             0% {transform: translateY(0);}
@@ -95,56 +50,31 @@
     </style>
 </head>
 <body>
+
     <h1>Welcome to Christmas!</h1>
     <a href="#" onclick="showMessage()">Click here</a>
-    <div id="message"></div>
-    
-    <div class="tree"></div>
 
-    <audio id="bell-sound">
-        <source src="https://www.soundjay.com/button/sounds/button-3.mp3" type="audio/mpeg">
-    </audio>
+    <div id="message"></div>
+    <div class="tree"></div>
 
     <script>
         function showMessage() {
-            document.getElementById("message").textContent = "Merry Christmas! 🎉";
-            document.getElementById("bell-sound").play();
-            createBalls(20);
+            document.getElementById("message").innerHTML = "Merry Christmas 🎄🎉";
         }
 
-        function createBalls(number) {
-            for (let i = 0; i < number; i++) {
-                let ball = document.createElement('div');
-                ball.className = 'ball';
-                ball.style.backgroundColor = getRandomColor();
-                ball.style.left = Math.random() * window.innerWidth + 'px';
-                ball.style.animationDuration = (3 + Math.random() * 2) + 's';
-                document.body.appendChild(ball);
-
-                setTimeout(() => ball.remove(), 5000);
-            }
-        }
-
-        function getRandomColor() {
-            const colors = ['#ff0000','#ffff00','#00ff00','#0000ff','#ff00ff','#ffa500'];
-            return colors[Math.floor(Math.random() * colors.length)];
-        }
-
-        // توليد ثلج مستمر
+        // Snow
         function createSnow() {
-            let snow = document.createElement('div');
-            snow.className = 'snow';
-            snow.style.left = Math.random() * window.innerWidth + 'px';
-            snow.style.animationDuration = (5 + Math.
-random() * 5) + 's';
-            snow.style.width = 5 + Math.random() * 10 + 'px';
-            snow.style.height = snow.style.width;
-            snow.style.opacity = 0.5 + Math.random() * 0.5;
+            let snow = document.createElement("div");
+            snow.className = "snow";
+            snow.style.left = Math.random() * window.innerWidth + "px";
+            snow.style.animationDuration = (4 + Math.random() * 5) + "s";
+            snow.style.opacity = 0.7;
             document.body.appendChild(snow);
 
-            setTimeout(() => snow.remove(), 10000);
+            setTimeout(() => snow.remove(), 9000);
         }
         setInterval(createSnow, 200);
     </script>
+
 </body>
 </html>
