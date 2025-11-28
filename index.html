@@ -1,80 +1,136 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Merry Christmas</title>
-    <style>
-        body {
-            font-family: 'Comic Sans MS', cursive;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background: linear-gradient(to bottom, #87ceeb, #fff);
-            overflow: hidden;
+border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 30px solid gold;
         }
-        #message {
-            font-size: 40px;
-            color: green;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-        a {
-            background: #ff4444;
-            padding: 12px 25px;
-            color: white;
-            text-decoration: none;
-            border-radius: 10px;
-        }
-        .tree {
-            width: 0;
-            height: 0;
-            border-left: 60px solid transparent;
-            border-right: 60px solid transparent;
-            border-bottom: 100px solid green;
-            margin: 100px auto 0;
-        }
+
+        /* الثلج */
         .snow {
             position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .snowflake {
+            position: absolute;
             top: -10px;
-            width: 10px;
-            height: 10px;
-            background: white;
-            border-radius: 50%;
-            animation: fall linear infinite;
+            color: white;
+            font-size: 1.5rem;
+            animation: fall linear forwards;
         }
+
         @keyframes fall {
-            0% {transform: translateY(0);}
-            100% {transform: translateY(110vh);}
+            to {
+                transform: translateY(105vh) rotate(360deg);
+            }
         }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #ff3366, 0 0 20px #ff3366;
+            }
+            to {
+                text-shadow: 0 0 15px #ff3366, 0 0 30px #ff3366, 0 0 40px #ff3366;
+            }
+        }
+
+        @keyframes twinkle {
+            from {
+                opacity: 0.5;
+                transform: translateX(-50%) scale(1);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) scale(1.2);
+            }
+        }
+
+        .message {
+            margin-top: 30px;
+            font-size: 1.8rem;
+            color: #ffcc00;
+            text-shadow: 0 0 5px #ff6600;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* هدايا تحت الشجرة */
+        .gifts {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .gift {
+            width: 40px;
+            height: 40px;
+            margin: 0 10px;
+        }
+
+        .gift-1 { background: #ff3333; }
+        .gift-2 { background: #33cc33; }
+        .gift-3 { background: #3366ff; }
     </style>
 </head>
 <body>
-
-    <h1>Christmas From Tamken2 </h1>
-    <a href="#" onclick="showMessage()">Click here</a>
-
-    <div id="message"></div>
-    <div class="tree"></div>
+    <div class="snow" id="snow"></div>
+    
+    <div class="container">
+        <h1>🎄 عيد ميلاد مجيد 🎄</h1>
+        
+        <div class="tree">
+            <div class="layer layer-1"></div>
+            <div class="layer layer-2"></div>
+            <div class="layer layer-3"></div>
+            <div class="trunk"></div>
+            <div class="star"></div>
+            
+            <!-- زينة الشجرة -->
+            <div class="ornament red"></div>
+            <div class="ornament blue"></div>
+            <div class="ornament yellow"></div>
+            <div class="ornament purple"></div>
+            <div class="ornament red"></div>
+            <div class="ornament blue"></div>
+        </div>
+        
+        <div class="gifts">
+            <div class="gift gift-1"></div>
+            <div class="gift gift-2"></div>
+            <div class="gift gift-3"></div>
+        </div>
+        
+        <div class="message">Merry Christmas with us!</div>
+    </div>
 
     <script>
-        function showMessage() {
-            document.getElementById("message").innerHTML = "MERRY CHRISTMAS 🎄🎉";
-        }
-
-        // Snow
-        function createSnow() {
-            let snow = document.createElement("div");
-            snow.className = "snow";
-            snow.style.left = Math.random() * window.innerWidth + "px";
-            snow.style.animationDuration = (4 + Math.random() * 5) + "s";
-            snow.style.opacity = 0.7;
-            document.body.appendChild(snow);
-
-            setTimeout(() => snow.remove(), 9000);
-        }
-        setInterval(createSnow, 200);
-    </script>
-
-</body>
-</html>
+        // إنشاء رقاقات الثلج
+        function createSnowflakes() {
+            const snowContainer = document.getElementById('snow');
+            const snowflakes = ['❄️', '⛄️', '✨', '🌟'];
+            
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const snowflake = document.createElement('div');
+                    snowflake.classList.add('snowflake');
+                    snowflake.innerHTML = snowflakes[Math.floor(Math.random() * snowflakes.length)];
+                    
+                    // وضع عشوائي للرقاقة
+                    snowflake.style.left = Math.random() * 100 + 'vw';
+                    
+                    // سرعة عشوائية للسقوط
+                    const duration = Math.random() * 5 + 5;
+                    snowflake.style.animationDuration = `${duration}s`;
+                    
+                    // تأخير عشوائي لبداية السقوط
+                    snowflake.style.animationDelay = Math.random() * 5 + 's';
+                    
+                    snowContainer.appendChild(snowflake);
