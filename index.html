@@ -1,10 +1,147 @@
-border-left: 15px solid transparent;
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عيد ميلاد مجيد</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #001a33, #000033);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px #ff3366, 0 0 20px #ff3366;
+            animation: glow 2s infinite alternate;
+            color: #ffcc00;
+        }
+
+        .tree {
+            position: relative;
+            margin: 40px auto;
+            width: 200px;
+            height: 300px;
+        }
+
+        /* جذع الشجرة */
+        .trunk {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 50px;
+            background: #8B4513;
+            border-radius: 5px;
+        }
+
+        /* طبقات الشجرة */
+        .layer {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 80px solid #0a5c1a;
+        }
+
+        .layer-1 {
+            bottom: 50px;
+            border-bottom-color: #0a5c1a;
+        }
+
+        .layer-2 {
+            bottom: 110px;
+            border-bottom-color: #0d7a24;
+            width: 0;
+            height: 0;
+            border-left: 70px solid transparent;
+            border-right: 70px solid transparent;
+            border-bottom: 100px solid #0d7a24;
+        }
+
+        .layer-3 {
+            bottom: 180px;
+            border-bottom-color: #119630;
+            width: 0;
+            height: 0;
+            border-left: 90px solid transparent;
+            border-right: 90px solid transparent;
+            border-bottom: 120px solid #119630;
+        }
+
+        /* زينة الشجرة */
+        .ornament {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            z-index: 5;
+        }
+
+        .ornament.red { background: #ff3333; box-shadow: 0 0 8px #ff3333; }
+        .ornament.blue { background: #3366ff; box-shadow: 0 0 8px #3366ff; }
+        .ornament.yellow { background: #ffff33; box-shadow: 0 0 8px #ffff33; }
+        .ornament.purple { background: #cc33ff; box-shadow: 0 0 8px #cc33ff; }
+
+        .ornament:nth-child(1) { top: 60px; left: 40px; }
+        .ornament:nth-child(2) { top: 80px; right: 60px; }
+        .ornament:nth-child(3) { top: 120px; left: 30px; }
+        .ornament:nth-child(4) { top: 140px; right: 40px; }
+        .ornament:nth-child(5) { top: 180px; left: 50px; }
+        .ornament:nth-child(6) { top: 200px; right: 50px; }
+
+        /* نجمة الشجرة */
+        .star {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 30px solid gold;
+            animation: twinkle 1.5s infinite alternate;
+        }
+
+        .star:after {
+            content: '';
+            position: absolute;
+            top: 7px;
+            left: -15px;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
             border-right: 15px solid transparent;
             border-top: 30px solid gold;
         }
 
         /* الثلج */
-        .snow {
+        .
+snow {
             position: absolute;
             top: 0;
             left: 0;
@@ -134,3 +271,10 @@ border-left: 15px solid transparent;
                     snowflake.style.animationDelay = Math.random() * 5 + 's';
                     
                     snowContainer.appendChild(snowflake);
+                    
+                    // إزالة الرقاقة بعد سقوطها
+                    setTimeout(() => {
+                        snowflake.remove();
+                    }, duration * 1000);
+                }, i * 200);
+            }
