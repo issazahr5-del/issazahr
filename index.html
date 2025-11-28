@@ -136,3 +136,15 @@
             snow.className = 'snow';
             snow.style.left = Math.random() * window.innerWidth + 'px';
             snow.style.animationDuration = (5 + Math.
+random() * 5) + 's';
+            snow.style.width = 5 + Math.random() * 10 + 'px';
+            snow.style.height = snow.style.width;
+            snow.style.opacity = 0.5 + Math.random() * 0.5;
+            document.body.appendChild(snow);
+
+            setTimeout(() => snow.remove(), 10000);
+        }
+        setInterval(createSnow, 200);
+    </script>
+</body>
+</html>
