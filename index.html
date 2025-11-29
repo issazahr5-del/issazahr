@@ -12,7 +12,7 @@
         }
 
         body {
-            background: linear-gradient(to bottom, #001a33, #000033);
+            background: linear-gradient(to bottom, #0a2e38, #05161f);
             color: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
@@ -22,126 +22,135 @@
             justify-content: center;
             overflow: hidden;
             position: relative;
+            text-align: center;
         }
 
         .container {
-            text-align: center;
             z-index: 10;
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             margin-bottom: 30px;
             text-shadow: 0 0 10px #ff3366, 0 0 20px #ff3366;
             animation: glow 2s infinite alternate;
             color: #ffcc00;
         }
 
+        .tree-container {
+            position: relative;
+            margin: 30px 0;
+        }
+
         .tree {
             position: relative;
-            margin: 40px auto;
             width: 200px;
             height: 300px;
+            margin: 0 auto;
+        }
+
+        /* طبقات الشجرة */
+        .tree-layer {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 75px solid transparent;
+            border-right: 75px solid transparent;
+            border-bottom: 100px solid #0a5c1a;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .tree-layer.middle {
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 120px solid #0d7a24;
+            bottom: 80px;
+        }
+
+        .tree-layer.top {
+            width: 0;
+            height: 0;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 90px solid #119630;
+            bottom: 180px;
         }
 
         /* جذع الشجرة */
         .trunk {
             position: absolute;
-            bottom: 0;
+            bottom: -20px;
             left: 50%;
             transform: translateX(-50%);
             width: 30px;
-            height: 50px;
+            height: 40px;
             background: #8B4513;
             border-radius: 5px;
-        }
-
-        /* طبقات الشجرة */
-        .layer {
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 50px solid transparent;
-            border-right: 50px solid transparent;
-            border-bottom: 80px solid #0a5c1a;
-        }
-
-        .layer-1 {
-            bottom: 50px;
-            border-bottom-color: #0a5c1a;
-        }
-
-        .layer-2 {
-            bottom: 110px;
-            border-bottom-color: #0d7a24;
-            width: 0;
-            height: 0;
-            border-left: 70px solid transparent;
-            border-right: 70px solid transparent;
-            border-bottom: 100px solid #0d7a24;
-        }
-
-        .layer-3 {
-            bottom: 180px;
-            border-bottom-color: #119630;
-            width: 0;
-            height: 0;
-            border-left: 90px solid transparent;
-            border-right: 90px solid transparent;
-            border-bottom: 120px solid #119630;
+            z-index: -1;
         }
 
         /* زينة الشجرة */
         .ornament {
             position: absolute;
-            width: 12px;
-            height: 12px;
+            width: 15px;
+            height: 15px;
             border-radius: 50%;
             z-index: 5;
+            animation: twinkle 3s infinite alternate;
         }
 
-        .ornament.red { background: #ff3333; box-shadow: 0 0 8px #ff3333; }
-        .ornament.blue { background: #3366ff; box-shadow: 0 0 8px #3366ff; }
-        .ornament.yellow { background: #ffff33; box-shadow: 0 0 8px #ffff33; }
-        .ornament.purple { background: #cc33ff; box-shadow: 0 0 8px #cc33ff; }
+        .ornament.red { background: #ff3333; box-shadow: 0 0 10px #ff3333; }
+        .ornament.blue { background: #3366ff; box-shadow: 0 0 10px #3366ff; }
+        .ornament.yellow { background: #ffff33; box-shadow: 0 0 10px #ffff33; }
+        .ornament.purple { background: #cc33ff; box-shadow: 0 0 10px #cc33ff; }
+        .ornament.silver { background: #c0c0c0; box-shadow: 0 0 10px #c0c0c0; }
 
-        .ornament:nth-child(1) { top: 60px; left: 40px; }
-        .ornament:nth-child(2) { top: 80px; right: 60px; }
-        .ornament:nth-child(3) { top: 120px; left: 30px; }
-        .ornament:nth-child(4) { top: 140px; right: 40px; }
-        .ornament:nth-child(5) { top: 180px; left: 50px; }
-        .ornament:nth-child(6) { top: 200px; right: 50px; }
+        /* تحديد مواقع الزينة */
+        .ornament:nth-child(1) { top: 50px; left: 40px; }
+        .ornament:nth-child(2) { top: 70px; right: 50px; }
+        .ornament:nth-child(3) { top: 100px; left: 30px; }
+        .ornament:nth-child(4) { top: 120px; right: 40px; }
+        .ornament:nth-child(5) { top: 150px; left: 60px; }
+        .ornament:nth-child(6) { top: 170px; right: 60px; }
+        .ornament:nth-child(7) { top: 200px; left: 40px; }
+        .ornament:nth-child(8) { top: 220px; right: 40px; }
 
         /* نجمة الشجرة */
         .star {
             position: absolute;
-            top: 30px;
+            top: 20px;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
             height: 0;
             border-left: 15px solid transparent;
             border-right: 15px solid transparent;
-            border-bottom: 30px solid gold;
-            animation: twinkle 1.5s infinite alternate;
+border-bottom: 25px solid gold;
+            animation: spin 4s infinite linear;
         }
 
         .star:after {
             content: '';
             position: absolute;
-            top: 7px;
+            top: 5px;
             left: -15px;
             width: 0;
             height: 0;
             border-left: 15px solid transparent;
             border-right: 15px solid transparent;
-            border-top: 30px solid gold;
+            border-top: 25px solid gold;
         }
 
         /* الثلج */
-        .
-snow {
+        .snow {
             position: absolute;
             top: 0;
             left: 0;
@@ -153,10 +162,11 @@ snow {
 
         .snowflake {
             position: absolute;
-            top: -10px;
+            top: -20px;
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             animation: fall linear forwards;
+            user-select: none;
         }
 
         @keyframes fall {
@@ -177,20 +187,32 @@ snow {
         @keyframes twinkle {
             from {
                 opacity: 0.5;
-                transform: translateX(-50%) scale(1);
+                transform: scale(1);
             }
             to {
                 opacity: 1;
-                transform: translateX(-50%) scale(1.2);
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes spin {
+            from {
+                transform: translateX(-50%) rotate(0deg);
+            }
+            to {
+                transform: translateX(-50%) rotate(360deg);
             }
         }
 
         .message {
             margin-top: 30px;
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: #ffcc00;
             text-shadow: 0 0 5px #ff6600;
             animation: pulse 2s infinite;
+            padding: 10px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
         }
 
         @keyframes pulse {
@@ -207,36 +229,95 @@ snow {
         }
 
         .gift {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             margin: 0 10px;
+            position: relative;
+            border-radius: 5px;
         }
 
-        .gift-1 { background: #ff3333; }
-        .gift-2 { background: #33cc33; }
-        .gift-3 { background: #3366ff; }
+        .gift-1 { 
+            background: #ff3333; 
+            box-shadow: 0 5px 15px rgba(255, 51, 51, 0.5);
+        }
+        .gift-2 { 
+            background: #33cc33; 
+            box-shadow: 0 5px 15px rgba(51, 204, 51, 0.5);
+        }
+        .gift-3 { 
+            background: #3366ff; 
+            box-shadow: 0 5px 15px rgba(51, 102, 255, 0.5);
+        }
+
+        .gift:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            top: 15px;
+            left: 0;
+        }
+
+        .gift:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            top: 0;
+            left: 15px;
+        }
+
+        /* أضواء خلفية */
+        .lights {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .light {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: lightTwinkle 2s infinite alternate;
+        }
+
+        @keyframes lightTwinkle {
+            0% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
     </style>
 </head>
 <body>
     <div class="snow" id="snow"></div>
+    <div class="lights" id="lights"></div>
     
     <div class="container">
         <h1>🎄 عيد ميلاد مجيد 🎄</h1>
-        
-        <div class="tree">
-            <div class="layer layer-1"></div>
-            <div class="layer layer-2"></div>
-            <div class="layer layer-3"></div>
-            <div class="trunk"></div>
-            <div class="star"></div>
-            
-            <!-- زينة الشجرة -->
-            <div class="ornament red"></div>
-            <div class="ornament blue"></div>
-            <div class="ornament yellow"></div>
-            <div class="ornament purple"></div>
-            <div class="ornament red"></div>
-            <div class="ornament blue"></div>
+<div class="tree-container">
+            <div class="tree">
+                <div class="tree-layer top"></div>
+                <div class="tree-layer middle"></div>
+                <div class="tree-layer"></div>
+                <div class="trunk"></div>
+                <div class="star"></div>
+                
+                <!-- زينة الشجرة -->
+                <div class="ornament red"></div>
+                <div class="ornament blue"></div>
+                <div class="ornament yellow"></div>
+                <div class="ornament purple"></div>
+                <div class="ornament red"></div>
+                <div class="ornament blue"></div>
+                <div class="ornament silver"></div>
+                <div class="ornament yellow"></div>
+            </div>
         </div>
         
         <div class="gifts">
@@ -254,7 +335,7 @@ snow {
             const snowContainer = document.getElementById('snow');
             const snowflakes = ['❄️', '⛄️', '✨', '🌟'];
             
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 80; i++) {
                 setTimeout(() => {
                     const snowflake = document.createElement('div');
                     snowflake.classList.add('snowflake');
@@ -270,11 +351,55 @@ snow {
                     // تأخير عشوائي لبداية السقوط
                     snowflake.style.animationDelay = Math.random() * 5 + 's';
                     
+                    // حجم عشوائي
+                    const size = Math.random() * 1.5 + 0.8;
+                    snowflake.style.fontSize = `${size}rem`;
+                    
                     snowContainer.appendChild(snowflake);
                     
                     // إزالة الرقاقة بعد سقوطها
                     setTimeout(() => {
-                        snowflake.remove();
+                        if (snowflake.parentNode) {
+                            snowflake.remove();
+                        }
                     }, duration * 1000);
                 }, i * 200);
             }
+        }
+        
+        // إنشاء أضواء خلفية
+        function createLights() {
+            const lightsContainer = document.getElementById('lights');
+            const colors = ['#ff3333', '#33cc33', '#3366ff', '#ffff33', '#cc33ff'];
+            
+            for (let i = 0; i < 30; i++) {
+                const light = document.createElement('div');
+                light.classList.add('light');
+                light.style.background = colors[Math.floor(Math.random() * colors.length)];
+                light.style.left = Math.random() * 100 + 'vw';
+                light.style.top = Math.random() * 100 + 'vh';
+                light.style.animationDelay = Math.random() * 2 + 's';
+                light.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                lightsContainer.appendChild(light);
+            }
+        }
+        
+        // إنشاء رقاقات ثلج بشكل مستمر
+        createSnowflakes();
+        setInterval(createSnowflakes, 6000);
+        
+        // إنشاء الأضواء
+        createLights();
+        
+        // إضافة تأثير وميض للزينة
+        const ornaments = document.querySelectorAll('.ornament');
+        setInterval(() => {
+            ornaments.forEach(ornament => {
+                if (Math.random() > 0.7) {
+                    ornament.style.opacity = Math.random() > 0.5 ? '1' : '0.6';
+                }
+            });
+        }, 500);
+    </script>
+</body>
+</html>
