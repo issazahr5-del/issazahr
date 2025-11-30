@@ -1,26 +1,140 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شجرة عيد الميلاد</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="snow"></div>
-    <div class="container">
-        <div class="tree">
-            <div class="layer layer-1"></div>
-            <div class="layer layer-2"></div>
-            <div class="layer layer-3"></div>
-            <div class="layer layer-4"></div>
-            <div class="star"></div>
-        </div>
-        <div class="gifts">
-            <div class="gift gift-1"></div>
-            <div class="gift gift-2"></div>
-            <div class="gift gift-3"></div>
-        </div>
-    </div>
-</body>
-</html>
+body {
+    background-color: #87ceeb;
+    margin: 0;
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    text-align: center;
+    top: 30vh;
+}
+
+.tree {
+    position: relative;
+    margin: 0 auto;
+    width: 0;
+    height: 0;
+}
+
+.layer {
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    width: 0;
+    position: relative;
+}
+
+.layer-1 {
+    border-bottom: 100px solid green;
+}
+
+.layer-2 {
+    border-bottom: 80px solid green;
+    top: -20px;
+}
+
+.layer-3 {
+    border-bottom: 60px solid green;
+    top: -40px;
+}
+
+.layer-4 {
+    border-bottom: 40px solid green;
+    top: -60px;
+}
+
+.star {
+    position: absolute;
+    top: -20px;
+    left: -15px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid yellow;
+}
+
+.star:before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 5px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid yellow;
+    transform: rotate(35deg);
+}
+
+.star:after {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 5px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid yellow;
+    transform: rotate(-35deg);
+}
+
+.gifts {
+    position: relative;
+    margin-top: 20px;
+}
+
+.gift {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin: 0 10px;
+    position: relative;
+}
+
+.gift-1 {
+    background-color: red;
+}
+
+.gift-2 {
+    background-color: blue;
+}
+
+.gift-3 {
+    background-color: green;
+}
+
+.gift:before, .gift:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+}
+
+.gift:before {
+    border-bottom: 10px solid yellow;
+    top: -10px;
+    left: 10px;
+}
+
+.gift:after {
+    border-bottom: 10px solid yellow;
+    top: 20px;
+    left: 10px;
+}
+
+.snow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    animation: snow 10s linear infinite;
+}
+
+@keyframes snow {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
