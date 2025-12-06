@@ -1,697 +1,1130 @@
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Merry Christmas</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(to bottom, #0a2e38, #1a5a6c);
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            overflow-x: hidden;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 15px;
-            width: 100%;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            color: #f8f8f8;
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            color: #a8e6cf;
-        }
-        
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 800px;
-        }
-        
-        .tree-container {
-            position: relative;
-            width: 300px;
-            height: 500px;
-            margin-bottom: 30px;
-        }
-        
-        .tree {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .tree-top {
-            width: 0;
-            height: 0;
-            border-left: 50px solid transparent;
-            border-right: 50px solid transparent;
-            border-bottom: 100px solid #0a7d3a;
-            position: relative;
-            z-index: 3;
-        }
-        
-        .tree-middle {
-            width: 0;
-            height: 0;
-            border-left: 70px solid transparent;
-            border-right: 70px solid transparent;
-            border-bottom: 120px solid #0b8d42;
-            position: relative;
-            top: -20px;
-            z-index: 2;
-        }
-        
-        .tree-bottom {
-            width: 0;
-            height: 0;
-            border-left: 90px solid transparent;
-            border-right: 90px solid transparent;
-            border-bottom: 140px solid #0c9d4a;
-            position: relative;
-            top: -40px;
-            z-index: 1;
-        }
-        
-        .trunk {
-            width: 30px;
-            height: 60px;
-            background: #8B4513;
-            position: relative;
-            top: -40px;
-            z-index: 0;
-            border-radius: 0 0 5px 5px;
-        }
-        
-        /* الزينة */
-        .ornament {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            z-index: 4;
-            animation: twinkle 2s infinite alternate;
-        }
-        
-        .ornament.red { background: radial-gradient(circle at 30% 30%, #ff4d4d, #b30000); }
-        .ornament.blue { background: radial-gradient(circle at 30% 30%, #4da6ff, #0059b3); }
-        .ornament.yellow { background: radial-gradient(circle at 30% 30%, #ffff4d, #b3b300); }
-        .ornament.purple { background: radial-gradient(circle at 30% 30%, #cc66ff, #6600cc); }
-        .ornament.silver { background: radial-gradient(circle at 30% 30%, #e6e6e6, #999999); }
-        
-        .star {
-            position: absolute;
-            top: -40px;
-            width: 40px;
-            height: 40px;
-            background: gold;
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            z-index: 5;
-            animation: starGlow 1.5s infinite alternate;
-            box-shadow: 0 0 20px gold;
-        }
-        
-        .lights {
-            position: absolute;
-            width: 100%
-height: 100%;
-            z-index: 4;
-        }
-        
-        .light {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            animation: lightBlink 1.5s infinite;
-        }
-        
-        .snow {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 6;
-        }
-        
-        .snowflake {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.8;
-            animation: snowfall linear infinite;
-        }
-        
-        .gifts {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .gift {
-            width: 60px;
-            height: 60px;
-            position: relative;
-        }
-        
-        .gift-box {
-            width: 100%;
-            height: 80%;
-            position: absolute;
-            bottom: 0;
-        }
-        
-        .gift-lid {
-            width: 110%;
-            height: 20%;
-            position: absolute;
-            top: 0;
-            left: -5%;
-        }
-        
-        .gift-ribbon {
-            position: absolute;
-            background: #ff4d4d;
-            z-index: 1;
-        }
-        
-        .gift-ribbon.horizontal {
-            width: 100%;
-            height: 15%;
-            top: 40%;
-        }
-        
-        .gift-ribbon.vertical {
-            width: 15%;
-            height: 100%;
-            left: 42.5%;
-        }
-        
-        .gift-bow {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: #ff4d4d;
-            border-radius: 50%;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 2;
-        }
-        
-        .gift:nth-child(1) .gift-box { background: #3498db; }
-        .gift:nth-child(1) .gift-lid { background: #2980b9; }
-        
-        .gift:nth-child(2) .gift-box { background: #e74c3c; }
-        .gift:nth-child(2) .gift-lid { background: #c0392b; }
-        
-        .gift:nth-child(3) .gift-box { background: #2ecc71; }
-        .gift:nth-child(3) .gift-lid { background: #27ae60; }
-        
-        .message {
-            margin-top: 30px;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 500px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .message h2 {
-            margin-bottom: 10px;
-            color: #a8e6cf;
-        }
-        
-        footer {
-            margin-top: 30px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #a8e6cf;
-            padding: 10px;
-        }
-        
-        /* Animations */
-        @keyframes twinkle {
-            0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(1.2); opacity: 1; }
-        }
-        
-        @keyframes starGlow {
-            0% { transform: scale(1) rotate(0deg); box-shadow: 0 0 10px gold; }
-            100% { transform: scale(1.1) rotate(5deg); box-shadow: 0 0 30px gold; }
-        }
-        
-        @keyframes lightBlink {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-        
-        @keyframes snowfall {
-            0% { transform: translateY(-10px) rotate(0deg); }
-            100% { transform: translateY(500px) rotate(360deg); }
-        }
-        
-        /* Responsive */
-        @media (max-width: 600px) {
-            .tree-container {
-                width: 250px;
-                height: 400px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Merry Christmas</h1>
-        <p class="subtitle">تهانينا بمناسبة عيد الميلاد!</p>
-    </header>
-    
-    <div class="container">
-        <div class="tree-container">
-
-
-<div class="tree">
-                <div class="tree-top"></div>
-                <div class="tree-middle"></div>
-                <div class="tree-bottom"></div>
-                <div class="trunk"></div>
-                <div class="star"></div>
-            </div>
-            
-            <!-- سيتم إضافة الزينة والأنوار عبر JavaScript -->
-            <div class="lights" id="lights"></div>
-            <div class="snow" id="snow"></div>
-        </div>
-        
-        <div class="gifts">
-            <div class="gift">
-                <div class="gift-box"></div>
-                <div class="gift-lid"></div>
-                <div class="gift-ribbon horizontal"></div>
-                <div class="gift-ribbon vertical"></div>
-                <div class="gift-bow"></div>
-            </div>
-            <div class="gift">
-                <div class="gift-box"></div>
-                <div class="gift-lid"></div>
-                <div class="gift-ribbon horizontal"></div>
-                <div class="gift-ribbon vertical"></div>
-                <div class="gift-bow"></div>
-            </div>
-            <div class="gift">
-                <div class="gift-box"></div>
-                <div class="gift-lid"></div>
-                <div class="gift-ribbon horizontal"></div>
-                <div class="gift-ribbon vertical"></div>
-                <div class="gift-bow"></div>
-            </div>
-        </div>
-        
-        <div class="message">
-            <h2>كل عام وأنتم بخير!</h2>
-            <p>تتمنى ادارة مشروع تمكين 2 لكم عيد ميلاد سعيد مليئ بالفرح والحب والسلام. تقبلوا أطيب التمنيات منا!</p>
-        </div>
-    </div>
-    
-    <footer>
-        <p>  شجرة الكريسماس المزينة | صنعت بكل الحب</p>
-    </footer>
-
-    <script>
-        // إضافة الزينة إلى الشجرة
-        function addOrnaments() {
-            const treeContainer = document.querySelector('.tree-container');
-            const ornamentColors = ['red', 'blue', 'yellow', 'purple', 'silver'];
-            
-            // إضافة الزينة إلى الجزء العلوي من الشجرة
-            for (let i = 0; i < 8; i++) {
-                const ornament = document.createElement('div');
-                ornament.className = ornament ${ornamentColors[i % ornamentColors.length]};
-                
-                // توزيع الزينة بشكل عشوائي على الجزء العلوي
-                const angle = (i / 8) * 2 * Math.PI;
-                const radius = 30;
-                ornament.style.left = calc(50% + ${radius * Math.cos(angle)}px - 7.5px);
-                ornament.style.top = calc(25% + ${radius * Math.sin(angle)}px - 7.5px);
-                
-                treeContainer.appendChild(ornament);
-            }
-            
-            // إضافة الزينة إلى الجزء الأوسط من الشجرة
-            for (let i = 0; i < 12; i++) {
-                const ornament = document.createElement('div');
-                ornament.className = ornament ${ornamentColors[i % ornamentColors.length]};
-                
-                // توزيع الزينة بشكل عشوائي على الجزء الأوسط
-                const angle = (i / 12) * 2 * Math.PI;
-                const radius = 50;
-                ornament.style.left = calc(50% + ${radius * Math.cos(angle)}px - 7.5px);
-                ornament.style.top = calc(50% + ${radius * Math.sin(angle)}px - 7.5px);
-                
-                treeContainer.appendChild(ornament);
-            }
-            
-            // إضافة الزينة إلى الجزء السفلي من الشجرة
-            for (let i = 0; i < 16; i++) {
-                const ornament = document.createElement('div');
-                ornament.className = ornament ${ornamentColors[i % ornamentColors.length]};
-                
-                // توزيع الزينة بشكل عشوائي على الجزء السفلي
-                const angle = (i / 16) * 2 * Math.PI;
-                const radius = 70;
-                ornament.style.left = calc(50% + ${radius * Math.cos(angle)}px - 7.5px);
-                ornament.style.top = calc(75% + ${radius * Math.sin(angle)}px - 7.5px);
-                
-                treeContainer.appendChild(ornament);
-            }
-        }
-
-
-html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شجرة الكريسماس المزينة</title>
+    <title>شجرة عيد ميلاد واقعية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(to bottom, #0a2e38, #1a5a6c);
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
+            background: linear-gradient(to bottom, #0a2e38, #1b1b2f);
+            color: #fff;
             overflow-x: hidden;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
         
         header {
-            text-align: center;
             margin-bottom: 30px;
-            padding: 15px;
-            width: 100%;
+            padding: 20px;
+            background: rgba(0, 50, 60, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 200, 255, 0.3);
         }
         
         h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 10px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            color: #f8f8f8;
+            color: #4cd137;
+            text-shadow: 0 0 10px rgba(76, 209, 55, 0.7);
         }
         
         .subtitle {
             font-size: 1.2rem;
-            color: #a8e6cf;
+            color: #00cec9;
+            margin-bottom: 20px;
         }
         
-        .container {
+        .content {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 800px;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .tree-section {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+            position: relative;
         }
         
         .tree-container {
             position: relative;
-            width: 300px;
-            height: 500px;
-            margin-bottom: 30px;
+            width: 100%;
+            height: 600px;
+            margin: 0 auto;
         }
         
+        /* الشجرة المعدلة */
         .tree {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 550px;
         }
         
-        .tree-top {
-            width: 0;
-            height: 0;
-            border-left: 50px solid transparent;
-            border-right: 50px solid transparent;
-            border-bottom: 100px solid #0a7d3a;
-            position: relative;
-            z-index: 3;
+        /* تصميم جديد لطبقات الشجرة */
+        .tree-branch {
+            position: absolute;
+            background: #0a7e0a;
+            border-radius: 50% 50% 0 0;
         }
         
-        .tree-middle {
-            width: 0;
-            height: 0;
-            border-left: 70px solid transparent;
-            border-right: 70px solid transparent;
-            border-bottom: 120px solid #0b8d42;
-            position: relative;
-            top: -20px;
+        .branch-1 {
+            width: 350px;
+            height: 120px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0a7e0a;
+            box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .branch-2 {
+            width: 280px;
+            height: 110px;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0b9412;
+            box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .branch-3 {
+            width: 220px;
+            height: 100px;
+            bottom: 170px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0caa15;
+            box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .branch-4 {
+            width: 170px;
+            height: 90px;
+            bottom: 240px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0dc018;
+            box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .branch-5 {
+            width: 120px;
+            height: 80px;
+            bottom: 310px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0ed61b;
+            box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .branch-6 {
+            width: 70px;
+            height: 70px;
+            bottom: 370px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1aff29;
+            box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tree-trunk {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 80px;
+            background: linear-gradient(to right, #8B4513, #A0522D, #8B4513);
+            border-radius: 5px;
             z-index: 2;
         }
         
-        .tree-bottom {
-            width: 0;
-            height: 0;
-            border-left: 90px solid transparent;
-            border-right: 90px solid transparent;
-            border-bottom: 140px solid #0c9d4a;
-            position: relative;
-            top: -40px;
+        .tree-shadow {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 250px;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 50%;
+            filter: blur(10px);
             z-index: 1;
         }
         
-        .trunk {
-            width: 30px;
-            height: 60px;
-            background: #8B4513;
-            position: relative;
-            top: -40px;
-            z-index: 0;
-            border-radius: 0 0 5px 5px;
-        }
-        
-        /* الزينة */
+        /* تحسين الزينة */
         .ornament {
             position: absolute;
-            width: 15px;
-            height: 15px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            z-index: 4;
-            animation: twinkle 2s infinite alternate;
+            z-index: 10;
+            cursor: pointer;
+            transition: transform 0.3s;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
         
-        .ornament.red { background: radial-gradient(circle at 30% 30%, #ff4d4d, #b30000); }
-        .ornament.blue { background: radial-gradient(circle at 30% 30%, #4da6ff, #0059b3); }
-        .ornament.yellow { background: radial-gradient(circle at 30% 30%, #ffff4d, #b3b300); }
-        .ornament.purple { background: radial-gradient(circle at 30% 30%, #cc66ff, #6600cc); }
-        .ornament.silver { background: radial-gradient(circle at 30% 30%, #e6e6e6, #999999); }
+        .ornament:hover {
+            transform: scale(1.3);
+        }
+        
+        .ornament.red { 
+            background: radial-gradient(circle at 30% 30%, #ff3838, #c23636); 
+        }
+        .ornament.blue { 
+            background: radial-gradient(circle at 30% 30%, #18dcff, #0abde3); 
+        }
+        .ornament.yellow { 
+            background: radial-gradient(circle at 30% 30%, #ffd32a, #fbc531); 
+        }
+        .ornament.purple { 
+            background: radial-gradient(circle at 30% 30%, #c56cf0, #7d5fff); 
+        }
+        .ornament.silver { 
+            background: radial-gradient(circle at 30% 30%, #dfe6e9, #b2bec3); 
+        }
+        .ornament.gold { 
+            background: radial-gradient(circle at 30% 30%, #ffd700, #daa520); 
+        }
+        
+        .ornament:before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            background: gold;
+            border-radius: 50%;
+        }
         
         .star {
             position: absolute;
-            top: -40px;
-            width: 40px;
-            height: 40px;
+            top: 335px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
             background: gold;
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            z-index: 5;
-            animation: starGlow 1.5s infinite alternate;
-            box-shadow: 0 0 20px gold;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.9);
+            z-index: 15;
+            animation: star-twinkle 2s infinite alternate;
         }
         
-        .lights {
-            position: absolute;
-            width: 100%;
-
-Issa Zahr, [11/30/2025 8:16 PM]
-height: 100%;
-            z-index: 4;
+        @keyframes star-twinkle {
+            0% { opacity: 0.8; transform: translateX(-50%) scale(1); }
+            100% { opacity: 1; transform: translateX(-50%) scale(1.1); }
         }
         
-        .light {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            animation: lightBlink 1.5s infinite;
-        }
-        
-        .snow {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 6;
-        }
-        
-        .snowflake {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.8;
-            animation: snowfall linear infinite;
-        }
-        
+        /* تحسين الهدايا */
         .gifts {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 350px;
+            height: 100px;
             display: flex;
             justify-content: center;
+            align-items: flex-end;
             gap: 20px;
-            margin-top: 20px;
+            z-index: 3;
         }
         
         .gift {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             position: relative;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+            cursor: pointer;
+            transition: transform 0.3s;
         }
         
-        .gift-box {
-            width: 100%;
-            height: 80%;
-            position: absolute;
-            bottom: 0;
+        .gift:hover {
+            transform: translateY(-10px) rotate(5deg);
+        }
+        
+        .gift-1 { 
+            background: linear-gradient(45deg, #ff3838 30%, #ff7675 70%);
+            height: 75px;
+        }
+        .gift-2 { 
+            background: linear-gradient(45deg, #18dcff 30%, #7efff5 70%);
+            height: 65px;
+        }
+        .gift-3 { 
+            background: linear-gradient(45deg, #32ff7e 30%, #7efff5 70%);
+            height: 80px;
+        }
+        .gift-4 { 
+            background: linear-gradient(45deg, #ff9f1a 30%, #ffd32a 70%);
+            height: 70px;
         }
         
         .gift-lid {
-            width: 110%;
-            height: 20%;
             position: absolute;
-            top: 0;
-            left: -5%;
-        }
-        
-        .gift-ribbon {
-            position: absolute;
-            background: #ff4d4d;
-            z-index: 1;
-        }
-        
-        .gift-ribbon.horizontal {
+            top: -15px;
+            left: 0;
             width: 100%;
-            height: 15%;
-            top: 40%;
-        }
-        
-        .gift-ribbon.vertical {
-            width: 15%;
-            height: 100%;
-            left: 42.5%;
+            height: 20px;
+            background: inherit;
+            border-radius: 5px 5px 0 0;
+            filter: brightness(0.9);
         }
         
         .gift-bow {
             position: absolute;
-            width: 20px;
-            height: 20px;
-            background: #ff4d4d;
-            border-radius: 50%;
             top: -10px;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 2;
+            width: 40px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
         }
         
-        .gift:nth-child(1) .gift-box { background: #3498db; }
-        .gift:nth-child(1) .gift-lid { background: #2980b9; }
+        .gift-bow:before,
+        .gift-bow:after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: #fff;
+            border-radius: 50%;
+            top: 5px;
+        }
         
-        .gift:nth-child(2) .gift-box { background: #e74c3c; }
-        .gift:nth-child(2) .gift-lid { background: #c0392b; }
+        .gift-bow:before {
+            left: -30px;
+        }
         
-        .gift:nth-child(3) .gift-box { background: #2ecc71; }
-        .gift:nth-child(3) .gift-lid { background: #27ae60; }
+        .gift-bow:after {
+            right: -30px;
+        }
         
-        .message {
-            margin-top: 30px;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
+        /* تحسين الثلج المتساقط */
+        .snowflakes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+        
+        .snowflake {
+            position: absolute;
+            top: -20px;
+            color: #fff;
+            font-size: 1.2rem;
+            opacity: 0.9;
+            animation: fall linear infinite;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.9);
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+        
+        /* إضافة أضواء خلفية للشجرة */
+        .tree-lights {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            filter: blur(20px);
+            opacity: 0.6;
+            z-index: 0;
+        }
+        
+        .light-1 {
+            background: radial-gradient(circle, rgba(76, 209, 55, 0.3) 0%, transparent 70%);
+            top: 30%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            transform: translateX(-50%);
+        }
+        
+        .light-2 {
+            background: radial-gradient(circle, rgba(0, 206, 201, 0.2) 0%, transparent 70%);
+            top: 40%;
+            left: 45%;
+            width: 200px;
+            height: 200px;
+        }
+        
+        .light-3 {
+            background: radial-gradient(circle, rgba(255, 56, 56, 0.2) 0%, transparent 70%);
+            top: 50%;
+            left: 55%;
+            width: 250px;
+            height: 250px;
+        }
+        
+        /* تحسين التحكم */
+        .controls-section {
+            flex: 1;
+            min-width: 300px;
             max-width: 500px;
+            background: rgba(0, 40, 50, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 0 15px rgba(0, 200, 255, 0.2);
+        }
+        
+        .controls-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #00cec9;
+        }
+        
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .control-group {
+            text-align: right;
+            margin-bottom: 15px;
+        }
+        
+        .control-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+            color: #4cd137;
+        }
+        
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        input[type="range"] {
+            flex: 1;
+            height: 10px;
+            -webkit-appearance: none;
+            background: linear-gradient(to right, #0a2e38, #00cec9);
+            border-radius: 5px;
+            outline: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #4cd137;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(76, 209, 55, 0.8);
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #4cd137, #44bd32);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 5px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
         
-        .message h2 {
-            margin-bottom: 10px;
-            color: #a8e6cf;
+        .btn:hover {
+            background: linear-gradient(45deg, #44bd32, #4cd137);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-blue {
+            background: linear-gradient(45deg, #00cec9, #0984e3);
+        }
+        
+        .btn-blue:hover {
+            background: linear-gradient(45deg, #0984e3, #00cec9);
+        }
+        
+        .counter {
+            font-size: 1.3rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 8px 15px;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 0 5px;
+            color: #ffd32a;
+            min-width: 50px;
         }
         
         footer {
-            margin-top: 30px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #a8e6cf;
-            padding: 10px;
+            margin-top: 40px;
+            padding: 20px;
+            color: #00cec9;
+            font-size: 1rem;
+            border-top: 1px solid rgba(0, 206, 201, 0.3);
         }
         
-        /* Animations */
+        /* تأثيرات اضافية */
+        .light {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+            z-index: 5;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+        
         @keyframes twinkle {
-            0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(1.2); opacity: 1; }
+            0% { opacity: 0.3; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
         }
         
-        @keyframes starGlow {
-            0% { transform: scale(1) rotate(0deg); box-shadow: 0 0 10px gold; }
-            100% { transform: scale(1.1) rotate(5deg); box-shadow: 0 0 30px gold; }
-        }
-        
-        @keyframes lightBlink {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-        
-        @keyframes snowfall {
-            0% { transform: translateY(-10px) rotate(0deg); }
-            100% { transform: translateY(500px) rotate(360deg); }
-        }
-        
-        /* Responsive */
-        @media (max-width: 600px) {
-            .tree-container {
-                width: 250px;
-                height: 400px;
+        /* تصميم متجاوب */
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+                align-items: center;
             }
             
+            .tree-container {
+                height: 500px;
+            }
+            
+            .tree {
+                width: 320px;
+                height: 450px;
+            }
+            
+            .branch-1 { width: 280px; height: 100px; bottom: 0; }
+            .branch-2 { width: 220px; height: 90px; bottom: 70px; }
+            .branch-3 { width: 170px; height: 80px; bottom: 130px; }
+            .branch-4 { width: 130px; height: 70px; bottom: 180px; }
+            .branch-5 { width: 90px; height: 60px; bottom: 230px; }
+            .branch-6 { width: 50px; height: 50px; bottom: 280px; }
+            
             h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
         }
     </style>
 </head>
 <body>
-    <header>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-tree"></i> شجرة عيد ميلاد واقعية</h1>
+            <p class="subtitle">شجرة تفاعلية مع زينة وهدايا وثلج متساقط - تم تحسين تصميم الشجرة</p>
+        </header>
+        
+        <div class="content">
+            <section class="tree-section">
+                <div class="tree-container">
+                    <!-- أضواء خلفية -->
+                    <div class="tree-lights light-1"></div>
+                    <div class="tree-lights light-2"></div>
+                    <div class="tree-lights light-3"></div>
+                    
+                    <!-- الثلج المتساقط -->
+                    <div class="snowflakes" id="snowflakes"></div>
+                    
+                    <!-- ظل الشجرة -->
+                    <div class="tree-shadow"></div>
+                    
+                    <!-- الهدايا -->
+                    <div class="gifts">
+                        <div class="gift gift-1">
+                            <div class="gift-lid"></div>
+                            <div class="gift-bow"></div>
+                        </div>
+                        <div class="gift gift-2">
+                            <div class="gift-lid"></div>
+                            <div class="gift-bow"></div>
+                        </div>
+                        <div class="gift gift-3">
+                            <div class="gift-lid"></div>
+                            <div class="gift-bow"></div>
+                        </div>
+                        <div class="gift gift-4">
+                            <div class="gift-lid"></div>
+                            <div class="gift-bow"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- الشجرة المعدلة -->
+                    <div class="tree">
+                        <div class="tree-trunk"></div>
+                        <div class="tree-branch branch-1"></div>
+                        <div class="tree-branch branch-2"></div>
+                        <div class="tree-branch branch-3"></div>
+                        <div class="tree-branch branch-4"></div>
+                        <div class="tree-branch branch-5"></div>
+                        <div class="tree-branch branch-6"></div>
+                        <div class="star"></div>
+                        
+                        <!-- الزينة ستتم إضافتها بالجافاسكريبت -->
+                    </div>
+                </div>
+            </section>
+            
+            <section class="controls-section">
+                <h2 class="controls-title">لوحة التحكم</h2>
+                <div class="controls">
+                    <div class="control-group">
+                        <label class="control-label">كمية الثلج: <span id="snow-count" class="counter">50</span></label>
+                        <div class="slider-container">
+                            <input type="range" id="snow-control" min="10" max="150" value="50">
+                            <i class="fas fa-snowflake"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label class="control-label">سرعة الثلج: <span id="snow-speed" class="counter">5</span></label>
+                        <div class="slider-container">
+                            <input type="range" id="speed-control" min="1" max="10" value="5">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label class="control-label">عدد الزينة: <span id="ornament-count" class="counter">20</span></label>
+                        <div class="slider-container">
+                            <input type="range" id="ornament-control" min="5" max="40" value="20">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label class="control-label">التحكم بالأضواء</label>
+                        <div>
+                            <button class="btn" id="toggle-lights">
+                                <i class="fas fa-lightbulb"></i> تشغيل/إطفاء الأضواء
+                            </button>
+                            <button class="btn btn-blue" id="add-ornament">
+                                <i class="fas fa-plus"></i> إضافة زينة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label class="control-label">تأثيرات خاصة</label>
+                        <div>
+                            <button class="btn" id="add-gift">
+                                <i class="fas fa-gift"></i> إضافة هدية
+                            </button>
+                            <button class="btn btn-blue" id="shake-tree">
+                                <i class="fas fa-tree"></i> هز الشجرة
+                            </button>
+                            <button class="btn" id="change-colors">
+                                <i class="fas fa-palette"></i> تغيير ألوان الشجرة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <p style="margin-top: 20px; color: #ffd32a;">
+                            <i class="fas fa-star"></i> انقر على الزينة والهدايا لرؤية تأثيرات خاصة!
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <footer>
+            <p>تم تصميم شجرة عيد الميلاد باستخدام HTML و CSS و JavaScript</p>
+            <p>كل عام وأنتم بخير! <i class="fas fa-heart" style="color:#ff3838;"></i></p>
+        </footer>
+    </div>
+
+    <script>
+        // عناصر DOM
+        const treeContainer = document.querySelector('.tree');
+        const snowflakesContainer = document.getElementById('snowflakes');
+        const snowControl = document.getElementById('snow-control');
+        const speedControl = document.getElementById('speed-control');
+        const ornamentControl = document.getElementById('ornament-control');
+        const toggleLightsBtn = document.getElementById('toggle-lights');
+        const addOrnamentBtn = document.getElementById('add-ornament');
+        const addGiftBtn = document.getElementById('add-gift');
+        const shakeTreeBtn = document.getElementById('shake-tree');
+        const changeColorsBtn = document.getElementById('change-colors');
+        
+        // العدادات
+        const snowCountElement = document.getElementById('snow-count');
+        const snowSpeedElement = document.getElementById('snow-speed');
+        const ornamentCountElement = document.getElementById('ornament-count');
+        
+        // متغيرات التطبيق
+        let ornaments = [];
+        let snowflakes = [];
+        let lightsOn = true;
+        let ornamentCount = 20;
+        let treeColors = [
+            ['#0a7e0a', '#0b9412', '#0caa15', '#0dc018', '#0ed61b', '#1aff29'],
+            ['#1e8449', '#229954', '#27ae60', '#2ecc71', '#52be80', '#58d68d'],
+            ['#145a32', '#186a3b', '#1d8348', '#239b56', '#28b463', '#2ecc71'],
+            ['#0b5345', '#117864', '#148f77', '#17a589', '#1abc9c', '#1de9b6'],
+            ['#7d6608', '#9a7d0a', '#b7950b', '#d4ac0d', '#f1c40f', '#f7dc6f']
+        ];
+        let currentColorSet = 0;
+        
+        // تهيئة التطبيق
+        function init() {
+            // إنشاء الزينة الأولية
+            createOrnaments(ornamentCount);
+            
+            // إنشاء الثلج
+            createSnowflakes(50);
+            
+            // تحديث العدادات
+            updateCounters();
+            
+            // إضافة مستمعي الأحداث
+            setupEventListeners();
+        }
+        
+        // إنشاء الزينة على الشجرة
+        function createOrnaments(count) {
+            // مسح الزينة الحالية
+            ornaments.forEach(ornament => {
+                if (ornament.element && ornament.element.parentNode) {
+                    ornament.element.parentNode.removeChild(ornament.element);
+                }
+            });
+            
+            ornaments = [];
+            
+            // إضافة زينة جديدة
+            for (let i = 0; i < count; i++) {
+                const ornament = document.createElement('div');
+                ornament.className = 'ornament';
+                
+                // تحديد لون عشوائي للزينة
+                const colors = ['red', 'blue', 'yellow', 'purple', 'silver', 'gold'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                ornament.classList.add(randomColor);
+                
+                // تحديد موقع عشوائي على الشجرة (مواقع محسنة)
+                const positions = [
+                    {left: '40%', top: '75%'},
+                    {left: '60%', top: '70%'},
+                    {left: '35%', top: '65%'},
+                    {left: '65%', top: '60%'},
+                    {left: '45%', top: '55%'},
+                    {left: '55%', top: '50%'},
+                    {left: '30%', top: '45%'},
+                    {left: '70%', top: '40%'},
+                    {left: '50%', top: '35%'},
+                    {left: '40%', top: '30%'},
+                    {left: '60%', top: '25%'},
+                    {left: '50%', top: '20%'},
+                    {left: '35%', top: '80%'},
+                    {left: '65%', top: '75%'},
+                    {left: '25%', top: '60%'},
+                    {left: '75%', top: '55%'},
+                    {left: '20%', top: '40%'},
+                    {left: '80%', top: '35%'},
+                    {left: '50%', top: '85%'},
+                    {left: '40%', top: '90%'},
+                    {left: '60%', top: '85%'},
+                    {left: '30%', top: '50%'},
+                    {left: '70%', top: '45%'},
+                    {left: '45%', top: '40%'},
+                    {left: '55%', top: '35%'}
+                ];
+                
+                const positionIndex = i % positions.length;
+                ornament.style.left = positions[positionIndex].left;
+                ornament.style.top = positions[positionIndex].top;
+                
+                // إضافة تأثيرات ضوئية عشوائية
+                if (Math.random() > 0.6) {
+                    const light = document.createElement('div');
+                    light.className = 'light';
+                    light.style.left = positions[positionIndex].left;
+                    light.style.top = positions[positionIndex].top;
+                    light.style.animationDelay = `${Math.random() * 2}s`;
+                    treeContainer.appendChild(light);
+                }
+                
+                // إضافة حدث النقر
+                ornament.addEventListener('click', function() {
+                    this.style.transform = 'scale(1.8) rotate(15deg)';
+                    this.style.boxShadow = '0 0 25px rgba(255, 255, 255, 1)';
+                    
+                    // إضافة صوت تأثير
+                    playOrnamentSound();
+                    
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1) rotate(0deg)';
+                        this.style.boxShadow = '0 0 8px rgba(255, 255, 255, 0.7)';
+                    }, 600);
+                });
+                
+                treeContainer.appendChild(ornament);
+                ornaments.push({element: ornament, color: randomColor});
+            }
+        }
+        
+        // إنشاء الثلج المتساقط
+        function createSnowflakes(count) {
+            // مسح الثلج الحالي
+            snowflakes.forEach(snowflake => {
+                if (snowflake.element && snowflake.element.parentNode) {
+                    snowflake.element.parentNode.removeChild(snowflake.element);
+                }
+            });
+            
+            snowflakes = [];
+            
+            // إنشاء رقاقات ثلج جديدة
+            for (let i = 0; i < count; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.innerHTML = '❄';
+                
+                // خصائص عشوائية
+                const size = Math.random() * 1.5 + 0.5;
+                const left = Math.random() * 100;
+                const speed = (parseInt(speedControl.value) || 5) * (Math.random() * 0.5 + 0.5);
+                const delay = Math.random() * 5;
+                const opacity = Math.random() * 0.5 + 0.5;
+                
+                snowflake.style.fontSize = `${size}rem`;
+                snowflake.style.left = `${left}%`;
+                snowflake.style.animationDuration = `${10 / speed}s`;
+                snowflake.style.animationDelay = `${delay}s`;
+                snowflake.style.opacity = opacity;
+                
+                snowflakesContainer.appendChild(snowflake);
+                snowflakes.push({element: snowflake, speed: speed});
+            }
+        }
+        
+        // تحديث الثلج عند تغيير السرعة
+        function updateSnowSpeed() {
+            const speed = parseInt(speedControl.value);
+            snowflakes.forEach(snowflake => {
+                const newSpeed = speed * (Math.random() * 0.5 + 0.5);
+                snowflake.element.style.animationDuration = `${10 / newSpeed}s`;
+                snowflake.speed = newSpeed;
+            });
+        }
+        
+        // إضافة زينة جديدة
+        function addNewOrnament() {
+            const ornament = document.createElement('div');
+            ornament.className = 'ornament';
+            
+            const colors = ['red', 'blue', 'yellow', 'purple', 'silver', 'gold'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            ornament.classList.add(randomColor);
+            
+            // موقع عشوائي جديد
+            const left = Math.random() * 60 + 20;
+            const top = Math.random() * 75 + 10;
+            
+            ornament.style.left = `${left}%`;
+            ornament.style.top = `${top}%`;
+            
+            // إضافة حدث النقر
+            ornament.addEventListener('click', function() {
+                this.style.transform = 'scale(1.8) rotate(15deg)';
+                this.style.boxShadow = '0 0 25px rgba(255, 255, 255, 1)';
+                
+                // إضافة صوت تأثير
+                playOrnamentSound();
+                
+                setTimeout(() => {
+                    this.style.transform = 'scale(1) rotate(0deg)';
+                    this.style.boxShadow = '0 0 8px rgba(255, 255, 255, 0.7)';
+                }, 600);
+            });
+            
+            treeContainer.appendChild(ornament);
+            ornaments.push({element: ornament, color: randomColor});
+            ornamentCount++;
+            updateCounters();
+        }
+        
+        // إضافة هدية جديدة
+        function addNewGift() {
+            const giftsContainer = document.querySelector('.gifts');
+            
+            // إنشاء هدية جديدة
+            const gift = document.createElement('div');
+            gift.className = 'gift';
+            
+            const giftColors = ['gift-1', 'gift-2', 'gift-3', 'gift-4'];
+            const randomColor = giftColors[Math.floor(Math.random() * giftColors.length)];
+            gift.classList.add('gift', randomColor);
+            
+            // ارتفاع عشوائي
+            const height = Math.random() * 20 + 60;
+            gift.style.height = `${height}px`;
+            
+            // إضافة الغطاء والرباط
+            const giftLid = document.createElement('div');
+            giftLid.className = 'gift-lid';
+            
+            const giftBow = document.createElement('div');
+            giftBow.className = 'gift-bow';
+            
+            gift.appendChild(giftLid);
+            gift.appendChild(giftBow);
+            
+            // إضافة حدث النقر
+            gift.addEventListener('click', function() {
+                this.style.transform = 'translateY(-20px) rotate(10deg) scale(1.2)';
+                this.style.boxShadow = '0 15px 25px rgba(255, 255, 255, 0.5)';
+                
+                // إضافة صوت تأثير
+                playGiftSound();
+                
+                setTimeout(() => {
+                    this.style.transform = 'translateY(0) rotate(0deg) scale(1)';
+                    this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.6)';
+                }, 500);
+            });
+            
+            giftsContainer.appendChild(gift);
+        }
+        
+        // هز الشجرة
+        function shakeTree() {
+            const treeBranches = document.querySelectorAll('.tree-branch');
+            
+            // إضافة تأثير الهز
+            treeBranches.forEach(branch => {
+                branch.style.transform = 'translateX(-50%) translateX(10px)';
+            });
+            
+            // إضافة صوت تأثير
+            playShakeSound();
+            
+            // جعل بعض الزينة تتساقط
+            ornaments.forEach((ornament, index) => {
+                if (index % 4 === 0) {
+                    setTimeout(() => {
+                        ornament.element.style.transition = 'top 1s, transform 1s';
+                        ornament.element.style.top = `${parseFloat(ornament.element.style.top) + 30}%`;
+                        ornament.element.style.transform = 'rotate(45deg)';
+                        
+                        setTimeout(() => {
+                            ornament.element.style.transition = 'none';
+                            ornament.element.style.top = `${parseFloat(ornament.element.style.top) - 30}%`;
+                            ornament.element.style.transform = 'rotate(0deg)';
+                        }, 1000);
+                    }, index * 100);
+                }
+            });
+            
+            // إرجاع الشجرة إلى وضعها الطبيعي
+            setTimeout(() => {
+                treeBranches.forEach(branch => {
+                    branch.style.transform = 'translateX(-50%)';
+                });
+            }, 300);
+        }
+        
+        // تبديل الأضواء
+        function toggleLights() {
+            lightsOn = !lightsOn;
+            const lights = document.querySelectorAll('.light, .ornament, .star');
+            
+            if (lightsOn) {
+                lights.forEach(light => {
+                    light.style.opacity = '1';
+                });
+                document.querySelectorAll('.tree-lights').forEach(light => {
+                    light.style.opacity = '0.6';
+                });
+                toggleLightsBtn.innerHTML = '<i class="fas fa-lightbulb"></i> إطفاء الأضواء';
+            } else {
+                lights.forEach(light => {
+                    light.style.opacity = '0.2';
+                });
+                document.querySelectorAll('.tree-lights').forEach(light => {
+                    light.style.opacity = '0.2';
+                });
+                toggleLightsBtn.innerHTML = '<i class="fas fa-lightbulb"></i> تشغيل الأضواء';
+            }
+        }
+        
+        // تغيير ألوان الشجرة
+        function changeTreeColors() {
+            currentColorSet = (currentColorSet + 1) % treeColors.length;
+            const colors = treeColors[currentColorSet];
+            
+            const branches = document.querySelectorAll('.tree-branch');
+            branches.forEach((branch, index) => {
+                if (index < colors.length) {
+                    branch.style.backgroundColor = colors[index];
+                }
+            });
+            
+            // إضافة تأثير مرئي
+            document.querySelector('.tree').style.filter = 'brightness(1.1)';
+            setTimeout(() => {
+                document.querySelector('.tree').style.filter = 'brightness(1)';
+            }, 500);
+        }
+        
+        // تشغيل أصوات التأثيرات
+        function playOrnamentSound() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = 800;
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.3);
+        }
+        
+        function playGiftSound() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = 600;
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.4);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.4);
+        }
+        
+        function playShakeSound() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            
+            // إنشاء ضوضاء بيضاء
+            const bufferSize = 2 * audioContext.sampleRate;
+            const noiseBuffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+            const output = noiseBuffer.getChannelData(0);
+            
+            for (let i = 0; i < bufferSize; i++) {
+                output[i] = Math.random() * 2 - 1;
+            }
+            
+            const whiteNoise = audioContext.createBufferSource();
+            whiteNoise.buffer = noiseBuffer;
+            whiteNoise.loop = true;
+            
+            const gainNode = audioContext.createGain();
+            whiteNoise.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5);
+            
+            whiteNoise.start(audioContext.currentTime);
+            whiteNoise.stop(audioContext.currentTime + 0.5);
+        }
+        
+        // تحديث العدادات
+        function updateCounters() {
+            snowCountElement.textContent = snowControl.value;
+            snowSpeedElement.textContent = speedControl.value;
+            ornamentCountElement.textContent = ornamentCount;
+        }
+        
+        // إعداد مستمعي الأحداث
+        function setupEventListeners() {
+            // التحكم في الثلج
+            snowControl.addEventListener('input', function() {
+                createSnowflakes(parseInt(this.value));
+                updateCounters();
+            });
+            
+            // التحكم في سرعة الثلج
+            speedControl.addEventListener('input', function() {
+                updateSnowSpeed();
+                updateCounters();
+            });
+            
+            // التحكم في الزينة
+            ornamentControl.addEventListener('input', function() {
+                ornamentCount = parseInt(this.value);
+                createOrnaments(ornamentCount);
+                updateCounters();
+            });
+            
+            // أزرار التحكم
+            toggleLightsBtn.addEventListener('click', toggleLights);
+            addOrnamentBtn.addEventListener('click', addNewOrnament);
+            addGiftBtn.addEventListener('click', addNewGift);
+            shakeTreeBtn.addEventListener('click', shakeTree);
+            changeColorsBtn.addEventListener('click', changeTreeColors);
+            
+            // إضافة أحداث النقر للهدايا الموجودة
+            document.querySelectorAll('.gift').forEach(gift => {
+                gift.addEventListener('click', function() {
+                    this.style.transform = 'translateY(-20px) rotate(10deg) scale(1.2)';
+                    this.style.boxShadow = '0 15px 25px rgba(255, 255, 255, 0.5)';
+                    
+                    // إضافة صوت تأثير
+                    playGiftSound();
+                    
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(0) rotate(0deg) scale(1)';
+                        this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.6)';
+                    }, 500);
+                });
+            });
+        }
+        
+        // بدء التطبيق عندما يتم تحميل الصفحة
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
